@@ -1,4 +1,4 @@
-import "dotenv/config"
+require("dotenv").config()
 
 const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
