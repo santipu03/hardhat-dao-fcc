@@ -1,12 +1,15 @@
 const { deployments, ethers } = require("hardhat")
 const { assert, expect } = require("chai")
-const { VOTING_DELAY, VOTING_PERIOD, MIN_DELAY } = require("../../helper-hardhat-config")
+const {
+    VOTING_DELAY,
+    VOTING_PERIOD,
+    MIN_DELAY,
+    FUNC,
+    NEW_STORE_VALUE,
+    PROPOSAL_DESCRIPTION,
+} = require("../../helper-hardhat-config")
 const { moveBlocks } = require("../../utils/move-blocks")
 const { moveTime } = require("../../utils/move-time")
-
-const FUNC = "store"
-const NEW_STORE_VALUE = 77
-const PROPOSAL_DESCRIPTION = "Proposal #1 77 in the Box!"
 
 describe("Governor Flow", async () => {
     let governor
