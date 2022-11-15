@@ -6,8 +6,6 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
     const { deploy, log } = deployments
     const { deployer } = await getNamedAccounts()
 
-    log("-----------------------------")
-
     const args = [MIN_DELAY, [], []]
 
     const timeLock = await deploy("TimeLock", {
