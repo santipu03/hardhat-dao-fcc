@@ -1,10 +1,10 @@
-const { ethers, network } = require("hardhat")
+const { network } = require("hardhat")
 const { developmentChains } = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
 
 module.exports = async ({ deployments, getNamedAccounts }) => {
-    const { deployer } = await getNamedAccounts()
     const { deploy, log } = deployments
+    const { deployer } = await getNamedAccounts()
 
     const args = []
 
@@ -21,3 +21,5 @@ module.exports = async ({ deployments, getNamedAccounts }) => {
 
     log("-----------------------------")
 }
+
+module.exports.tags = ["all", "governancetoken"]
