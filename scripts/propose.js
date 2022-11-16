@@ -34,7 +34,7 @@ async function propose(functionToCall, args, proposalDescription) {
     )
     const proposeReceipt = await proposeTx.wait(1)
 
-    if (!developmentChains.includes(network.name)) {
+    if (developmentChains.includes(network.name)) {
         await moveBlocks(VOTING_DELAY + 1)
     }
 
@@ -42,6 +42,18 @@ async function propose(functionToCall, args, proposalDescription) {
     let proposals = JSON.parse(fs.readFileSync(proposalsFile, "utf8"))
     proposals[network.config.chainId.toString()].push(proposalId.toString())
     fs.writeFileSync(proposalsFile, JSON.stringify(proposals))
+
+    const proposalState = await governor.state(proposalId)
+    const proposalSnapShot = await governor.proposalSnapshot(proposalId)
+    const proposalDeadline = await governor.proposalDeadline(proposalId)
+
+    // The state of the proposal. 1 is not passed. 0 is passed.
+    console.log(`Current Proposal State: ${proposalState}`)
+    // What block # the proposal was snapshot
+    console.log(`Current Proposal Snapshot: ${proposalSnapShot}`)
+    // The block number the proposal voting expires
+    console.log(`Current Proposal Deadline: ${proposalDeadline}`)
+    console.log("--------------------------")
 }
 
 propose(FUNC, [NEW_STORE_VALUE], PROPOSAL_DESCRIPTION)
